@@ -23,6 +23,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
           <DialogTitle>About This App</DialogTitle>
           <DialogDescription>
             This app provides random icebreaker questions to spark conversation.
+            Created by <strong><a href="https://www.linkedin.com/in/johntheosouza/" target="_blank" rel="noopener noreferrer">John Theo</a>.</strong>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-start">
