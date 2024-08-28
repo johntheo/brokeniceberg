@@ -42,8 +42,12 @@ const Home: React.FC = () => {
     fetchQuestion(language, newId);
   };
 
-  const handleCopy = () => {
+  const handleCopyText = () => {
     navigator.clipboard.writeText(questionText);
+  };
+
+  const handleCopyURL = () => {
+    navigator.clipboard.writeText(window.location.href);
   };
 
   return (
@@ -62,11 +66,12 @@ const Home: React.FC = () => {
           <QuestionDisplay 
             questionId={questionId} 
             questionText={questionText} 
+            onCopyText={handleCopyText} 
           />
         </CardContent>
 
         <CardFooter className="flex justify-center space-x-4">
-          <Button variant="outline" onClick={handleCopy}>
+          <Button variant="outline" onClick={handleCopyURL}>
             <FiClipboard className="h-6 w-6" />
           </Button>
           <Button variant="outline" onClick={handleNewQuestion}>
