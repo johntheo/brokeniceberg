@@ -43,7 +43,7 @@ const Home: React.FC = () => {
     }
 
     fetchQuestion(lang, id);
-  }, [searchParams]);
+  }, [searchParams, setSearchParams]);
 
   const fetchQuestion = async (lang: string, id: number) => {
     const response = await import(`../assets/${lang}.json`);
@@ -58,7 +58,7 @@ const Home: React.FC = () => {
 
     ReactGA.event({
       category: "User",
-      action: "Change Language",
+      action: "change_laguage",
       label: newLang,
     });
   };
@@ -70,7 +70,7 @@ const Home: React.FC = () => {
     fetchQuestion(language, newId);
     ReactGA.event({
       category: 'User',
-      action: 'New Question',
+      action: 'new_question',
       label: language,
       value: questionId,
     });
@@ -80,7 +80,7 @@ const Home: React.FC = () => {
     navigator.clipboard.writeText(questionText);
     ReactGA.event({
       category: "User",
-      action: "Copy Question",
+      action: "copy_question",
       label: language,
       value: questionId,
     });
@@ -91,7 +91,7 @@ const Home: React.FC = () => {
     navigator.clipboard.writeText(window.location.href);
     ReactGA.event({
       category: "User",
-      action: "Share Question",
+      action: "share_question",
       label: window.location.href,
     });
     triggerToast("Link copied to clipboard. Thanks for sharing!");
@@ -117,7 +117,7 @@ const Home: React.FC = () => {
                   setModalOpen(true);
                   ReactGA.event({
                     category: "User",
-                    action: "Click Info",
+                    action: "click_info",
                   });
                 }}
               >
