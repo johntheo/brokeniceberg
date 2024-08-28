@@ -7,15 +7,11 @@ interface QuestionDisplayProps {
   onNewQuestion: () => void;
 }
 
-const QuestionDisplay: React.FC<QuestionDisplayProps> = ({ questionId, questionText, onCopy, onNewQuestion }) => {
+const QuestionDisplay: React.FC<QuestionDisplayProps> = ({ questionId, questionText }) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full text-center">
+    <div className="flex flex-col items-center justify-center text-center px-4">
       <p className="text-3xl">#{questionId}</p>
-      <p className="text-xl mt-2">{questionText}</p>
-      <div className="flex justify-center mt-4 space-x-4">
-        <button onClick={onCopy} className="outline">Copy</button>
-        <button onClick={onNewQuestion} className="outline">New Question</button>
-      </div>
+      <p className="text-xl mt-2 w-full max-w-[70%] break-words">{questionText}</p>
     </div>
   );
 };
