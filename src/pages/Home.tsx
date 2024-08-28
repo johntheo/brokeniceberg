@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { FiInfo, FiClipboard, FiShuffle } from 'react-icons/fi';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Toast, ToastClose, ToastProvider, ToastViewport } from '@/components/ui/toast';
 import QuestionDisplay from '../components/QuestionDisplay';
 import LanguageSelector from '../components/LanguageSelector';
 import InfoModal from '../components/InfoModal';
@@ -13,6 +14,7 @@ const Home: React.FC = () => {
   const [questionId, setQuestionId] = useState<number>(Math.floor(Math.random() * 100) + 1);
   const [questionText, setQuestionText] = useState<string>('');
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   useEffect(() => {
     const lang = searchParams.get('lang') || 'en';
@@ -44,44 +46,68 @@ const Home: React.FC = () => {
 
   const handleCopyText = () => {
     navigator.clipboard.writeText(questionText);
+    triggerToast('Question copied to the clipboard!');
   };
 
   const handleCopyURL = () => {
     navigator.clipboard.writeText(window.location.href);
+    triggerToast('Link copied to clipboard. Thanks for sharing!');
+  };
+
+  const triggerToast = (message: string) => {
+    setToastMessage(message);
+    // Reset toastMessage after it has been shown to allow re-triggering
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3000); // This delay allows the toast to dismiss before resetting the state
   };
 
   return (
-    <div className="h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-4xl h-full max-h-[80vh] flex flex-col p-8">
-        <CardHeader>
-          <div className="flex justify-between">
-            <Button variant="outline" onClick={() => setModalOpen(true)}>
-              <FiInfo className="h-6 w-6" />
+    <ToastProvider swipeDirection="up">
+      <div className="h-screen flex items-center justify-center p-4">
+        <Card className="w-full max-w-4xl h-full max-h-[80vh] flex flex-col p-8">
+          <CardHeader>
+            <div className="flex justify-between">
+              <Button variant="outline" onClick={() => setModalOpen(true)}>
+                <FiInfo className="h-6 w-6" />
+              </Button>
+              <LanguageSelector selectedLanguage={language} onLanguageChange={handleLanguageChange} />
+            </div>
+          </CardHeader>
+
+          <CardContent className="flex-grow flex items-center justify-center">
+            <QuestionDisplay 
+              questionId={questionId} 
+              questionText={questionText} 
+              onCopyText={handleCopyText} 
+            />
+          </CardContent>
+
+          <CardFooter className="flex justify-center space-x-4">
+            <Button variant="outline" onClick={handleCopyURL}>
+              <FiClipboard className="h-6 w-6" />
             </Button>
-            <LanguageSelector selectedLanguage={language} onLanguageChange={handleLanguageChange} />
-          </div>
-        </CardHeader>
+            <Button variant="outline" onClick={handleNewQuestion}>
+              <FiShuffle className="h-6 w-6" />
+            </Button>
+          </CardFooter>
+        </Card>
 
-        <CardContent className="flex-grow flex items-center justify-center">
-          <QuestionDisplay 
-            questionId={questionId} 
-            questionText={questionText} 
-            onCopyText={handleCopyText} 
-          />
-        </CardContent>
+        <InfoModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
 
-        <CardFooter className="flex justify-center space-x-4">
-          <Button variant="outline" onClick={handleCopyURL}>
-            <FiClipboard className="h-6 w-6" />
-          </Button>
-          <Button variant="outline" onClick={handleNewQuestion}>
-            <FiShuffle className="h-6 w-6" />
-          </Button>
-        </CardFooter>
-      </Card>
+        {toastMessage && (
+          <Toast className="w-full max-w-sm h-12 flex items-center justify-center bg-gray-800 text-white rounded-md shadow-lg">
+            <div className="text-sm">
+              {toastMessage}
+            </div>
+            <ToastClose onClick={() => setToastMessage(null)} className="ml-4 text-white" />
+          </Toast>
+        )}
 
-      <InfoModal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
-    </div>
+        {/* ToastViewport positioned at the top-center of the page with a narrow height */}
+        <ToastViewport className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4" />
+      </div>
+    </ToastProvider>
   );
 };
 
