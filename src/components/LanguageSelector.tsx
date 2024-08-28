@@ -17,7 +17,7 @@ interface LanguageSelectorProps {
 const LanguageSelector: React.FC<LanguageSelectorProps> = ({ selectedLanguage, onLanguageChange }) => {
   return (
     <Select value={selectedLanguage} onValueChange={onLanguageChange}>
-      <SelectTrigger className="w-[120px] outline">
+      <SelectTrigger className="w-[180px] outline">
         <SelectValue placeholder="Select language" />
       </SelectTrigger>
       <SelectContent>
