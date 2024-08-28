@@ -1,50 +1,33 @@
-# React + TypeScript + Vite
+# Icebreaker Questions Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple web application that displays icebreaker questions to users. The app allows users to copy the questions, share them via URL, and switch between different languages. The app is built using modern frontend technologies and is deployed on Firebase Hosting.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Display random icebreaker questions.
+- Support for multiple languages (English, Portuguese, Spanish).
+- Users can copy the question text or share the URL containing the question.
+- Language selection with automatic URL updates.
+- Minimalistic UI with responsive design.
+- Google Analytics 4 (GA4) integration for tracking user interactions.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React**: A JavaScript library for building user interfaces.
+- **Vite**: A fast development build tool that provides a modern setup for React apps.
+- **TypeScript**: A typed superset of JavaScript that provides type safety and better developer tooling.
+- **Shadcn**: A set of pre-built UI components for React.
+- **React Router**: A library for handling navigation and routing in React applications.
+- **Firebase Hosting**: A platform for hosting web apps with a global content delivery network.
+- **Google Analytics 4 (GA4)**: Used for tracking user interactions and events in the app.
+- **react-ga4**: A library for integrating Google Analytics 4 with React applications.
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### Prerequisites
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Before running the project, ensure you have the following installed:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- **Node.js**: v14.x or later
+- **npm**: v6.x or later (comes with Node.js)
+- **Firebase CLI**: For deploying the app to Firebase Hosting
