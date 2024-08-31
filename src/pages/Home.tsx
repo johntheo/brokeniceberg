@@ -108,7 +108,7 @@ const Home: React.FC = () => {
   return (
     <ToastProvider swipeDirection="up">
       <div className="h-screen flex items-center justify-center p-4">
-        <Card className="w-full max-w-4xl h-full max-h-[80vh] flex flex-col p-8">
+        <Card className="w-full max-w-4xl h-full max-h-[80vh] flex flex-col p-8 card">
           <CardHeader>
             <div className="flex justify-between">
               <Button
